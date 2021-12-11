@@ -110,11 +110,22 @@ import BScroll from 'better-scroll'
 
 export default {
     name: 'Category',
+    data () {
+      return {
+        
+      }
+    },
     created () {
       // new BScroll('.content')
     },
     mounted () {
-      new BScroll('.wrapper')
+      // 默认情况下BScroll是不可以实时的监听滚动位置
+      // probe 侦测
+      // 0，1 都是不侦测实时的位置
+      // 2：在手指滚动的过程侦测，手机离开的惯性过程中不侦测
+      // 3：只要是滚动 都侦测
+      const bscroll = new BScroll('.wrapper')
+      
     }
 }
 </script>
