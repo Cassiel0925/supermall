@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+
+    <!-- 保持Home的状态 不让Home 随意销毁掉 -->
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <main-tab-bar/>
   </div>
 </template>
