@@ -112,7 +112,7 @@ export default {
     name: 'Category',
     data () {
       return {
-        
+        scroll: null
       }
     },
     created () {
@@ -124,7 +124,18 @@ export default {
       // 0，1 都是不侦测实时的位置
       // 2：在手指滚动的过程侦测，手机离开的惯性过程中不侦测
       // 3：只要是滚动 都侦测
-      const bscroll = new BScroll('.wrapper')
+      this.scroll = new BScroll(('.wrapper'), {
+        probeType: 3,
+        pullUpLoad: true
+      })
+
+      this.scroll.on('scroll',(position) => {
+        // console.log(position);
+      })
+
+      this.scroll.on('pullingUp',() => {
+        console.log('上拉加载更多');
+      })
       
     }
 }
