@@ -76,6 +76,8 @@ export default {
     destroyed () {
       console.log();
     },
+
+    // 让Home中的内容保持原来的位置
     activated () {
       this.$refs.scroll.scrollTo(0,this.saveY,0)
       this.$refs.scroll.refresh()
@@ -83,6 +85,7 @@ export default {
     deactivated () {
       this.saveY = this.$refs.scroll.getScrollY()
     },
+
     created () {
       // 1. 请求多个数据
      this.getHomeMultidata()
@@ -101,9 +104,6 @@ export default {
         refresh()
       })
 
-      // 2. 获取tabControl的offsetTop
-      // 所有的组件都有一个属性$el:用于获取组件中的元素
-      // this.$refs.tabControl.$el.offsetTop --> 这里得到的offsetTop 是图片未加载完得到的高度
     },
     methods: {
       /* 
@@ -141,6 +141,10 @@ export default {
         this.getHomeGoods(this.currentType)
         // this.$refs.scroll.scroll.refresh()
       },
+      
+      //   获取tabControl的offsetTop
+      // 所有的组件都有一个属性$el:用于获取组件中的元素
+      // this.$refs.tabControl.$el.offsetTop --> 这里得到的offsetTop 是图片未加载完得到的高度
       swiperImageLoad() {
         this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop;
       },
