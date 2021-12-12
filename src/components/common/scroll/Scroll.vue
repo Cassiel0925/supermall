@@ -30,7 +30,10 @@ export default {
         this.scroll = new BScroll (this.$refs.wrapper, {
             probeType: this.probeType,
             click: true,
-            pullUpLoad: this.pullUpLoad
+            pullUpLoad: this.pullUpLoad,
+            // 轮播图 出现问题
+            // observeDOM: true,
+            // observeImage: true,
         })
 
         // 2. 监听滚动的位置
@@ -42,13 +45,18 @@ export default {
         this.scroll.on('pullingUp',() => {
             this.$emit('pullingUp')
         })
+
+         
     },
     methods: {
         scrollTo(x, y, time=300) {
-            this.scroll.scrollTo(x,y,time)
+            this.scroll && this.scroll.scrollTo && this.scroll.scrollTo(x,y,time)
         },
         finishPullUp() {
             this.scroll.finishPullUp()
+        },
+        refresh() {
+            this.scroll && this.scroll.refresh()
         }
     }
 }
