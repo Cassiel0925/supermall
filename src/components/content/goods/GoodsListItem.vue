@@ -1,5 +1,5 @@
 .<template>
-  <div class="goods-item">
+  <div class="goods-item" @click="itemClick">
       <img :src="goodsItem.show.img" alt="" @load="imageLoad">
       <div class="goods-info">
           <p>{{goodsItem.title}}}</p>
@@ -21,8 +21,15 @@ export default {
         }
     },
     methods: {
+      // 轮播图加载
       imageLoad() {
         this.$bus.$emit('itemImageLoad')
+      },
+      // 跳转到商品详情页
+      itemClick() {
+        // console.log('跳转到详情页');
+        // 因为需要返回 所以用push 而不是 repalce
+        this.$router.push('/detail/' + this.goodsItem.iid)
       }
     }
 }

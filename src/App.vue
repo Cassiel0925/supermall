@@ -2,7 +2,7 @@
   <div id="app">
 
     <!-- 保持Home的状态 不让Home 随意销毁掉 -->
-    <keep-alive>
+    <keep-alive exclude="Detail">
       <router-view></router-view>
     </keep-alive>
     <main-tab-bar/>

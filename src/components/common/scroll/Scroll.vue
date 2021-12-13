@@ -32,7 +32,7 @@ export default {
             click: true,
             pullUpLoad: this.pullUpLoad,
             // 轮播图 出现问题
-            // observeDOM: true,
+            observeDOM: true,
             // observeImage: true,
         })
 
