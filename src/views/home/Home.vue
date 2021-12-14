@@ -34,10 +34,10 @@ import NavBar from 'components/common/navbar/NavBar'
 import TabControl from 'components/content/tabcontrol/TabControl'
 import GoodsList from 'components/content/goods/GoodsList'
 import Scroll from 'components/common/scroll/Scroll'
-import BackTop from 'components/content/backtop/BackTop.vue'
 
 import {getHomeMultidata, getHomeGoods} from "network/home"
 import {debounce} from "../../common/utils"
+import {backTopMixin} from "common/mixin.js"
 
 export default {
     name: 'Home',
@@ -49,8 +49,8 @@ export default {
       TabControl,
       GoodsList,
        Scroll,
-        BackTop,
     },
+    mixins: [backTopMixin],
     data () {
       return {
         // result: null
@@ -62,7 +62,6 @@ export default {
           'sell': {page: 0, list: []},
         },
        currentType : 'pop',
-       isShowBackTop: false,
        tabOffsetTop: 0,
        isTabFixed: false,
        saveY: 0
@@ -126,9 +125,7 @@ export default {
         this.$refs.tabControl2.currentIndex = index;
 
       },
-      backClick() {
-        this.$refs.scroll.scrollTo(0,0)
-      },
+      
       contentScroll(position) {
         // 1. 判断backTop是否显示
         // console.log(position);

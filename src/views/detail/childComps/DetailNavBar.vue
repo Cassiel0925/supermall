@@ -33,7 +33,8 @@ export default {
     methods: {
         // 获取当前点击的对象
         titleClick(index) {
-            this.currentIndex = index
+            this.currentIndex = index,
+            this.$emit('titleClick',index)
         },
         // 返回按钮
         backClick() {
