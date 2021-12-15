@@ -2,7 +2,10 @@
   <div class="cart-bottom-bar">
       <!-- 全选 -->
       <div class="check-all">
-          <check-button class="check-box"/>
+          <check-button 
+                :is-checked="isSelectAll" 
+                class="check-box"
+                @click.native="checkClick"/>
           <span>全选</span>
       </div>
       <!-- 合计 -->
@@ -42,6 +45,31 @@ export default {
             }).reduce((preValue, item) => {
                 return preValue + item.count
             },0)
+        },
+        isSelectAll() {
+            if(this.cartList.length === 0) return false
+            // 1. 使用find
+            return !this.cartList.find(item => !item.checked)
+
+            // 2. 使用filter
+            // return !(this.cartList.filter(item => !item.checked).length)
+
+            // 3. 普通遍历
+            // for(let item of this.cartList) {
+            //     if(!item.checked) {
+            //         return false
+            //     }
+            // }
+            // return true
+        }
+    },
+    methods: {
+        checkClick() {
+            if(this.isSelectAll) { //全部选中
+                this.cartList.forEach(item => item.checked = false)
+            } else { //部分或全部不选中
+                this.cartList.forEach(item => item.checked = true)
+            }
         }
     }
 

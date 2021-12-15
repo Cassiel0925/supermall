@@ -183,7 +183,9 @@ export default {
 
             // 2. 将商品加入到购物车里
             // this.$store.commit('addCart', product)
-            this.$store.dispatch('addCart', product)
+            this.$store.dispatch('addCart', product).then(res => {
+                console.log(res);
+            })
 
         }
         
