@@ -23,6 +23,8 @@
     <detail-bottom-bar @addCart="addToCart"/>
     <!-- 回到顶部 -->
     <back-top @click.native="backClick" v-show="isShowBackTop"/>
+    <!-- 弹窗 -->
+    <!-- <toast :message="message" :show="show" /> -->
   </div>
 </template>
 
@@ -37,11 +39,14 @@ import DetailCommentInfo from './childComps/DetailCommentInfo.vue'
 import DetailBottomBar from './childComps/DetailBottomBar.vue'
 // import BackTop from 'components/content/backtop/BackTop.vue'
 
-import Scroll from '../../components/common/scroll/Scroll.vue'
-import GoodsList from '../../components/content/goods/GoodsList.vue'
+import Scroll from 'components/common/scroll/Scroll.vue'
+import GoodsList from 'components/content/goods/GoodsList.vue'
+// import Toast from 'components/common/toast/Toast.vue'
 
 import {getDetail, Goods, Shop, GoodsParam,getRecommend} from 'network/detail.js'
 import {backTopMixin} from 'common/mixin.js'
+
+import { mapActions } from 'vuex'
 
 export default {
     name: 'Detail',
@@ -56,7 +61,7 @@ export default {
         DetailCommentInfo,
         GoodsList,
         DetailBottomBar,
-        // BackTop
+        // Toast
     },
     mixins: [backTopMixin],
     data () {
@@ -71,6 +76,8 @@ export default {
             recommends: [],
             themeTopYs: [],
             currentIndex: 0,
+            // message: '',
+            // show: false
         }
     },
     created () {
@@ -124,6 +131,8 @@ export default {
         })
     },
     methods: {
+        // vuex映射
+        ...mapActions (['addCart']),
         imageLoad() {
             this.$refs.scroll.refresh()
             // console.log(this.$refs.scroll);
@@ -182,10 +191,25 @@ export default {
             product.iid = this.iid;
 
             // 2. 将商品加入到购物车里
-            // this.$store.commit('addCart', product)
-            this.$store.dispatch('addCart', product).then(res => {
-                console.log(res);
+            // 方法二： 映射方法
+            this.addCart(product).then(res => {
+                // console.log(this.$toast);
+                this.$toast.show(res, 1500)
+
+                // console.log(res);
+                // this.show = true;
+                // this.message = res;
+
+                // setTimeout(() => {
+                //     this.show = false;
+                //     this.message = '';
+                // },1500)
             })
+            // this.$store.commit('addCart', product)
+            // 方法一： 普通方法
+            // this.$store.dispatch('addCart', product).then(res => {
+            //     console.log(res);
+            // })
 
         }
         
